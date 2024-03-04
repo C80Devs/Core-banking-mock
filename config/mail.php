@@ -107,6 +107,15 @@ return [
     |
     */
 
+    'imap' => [
+        'host' => 'mail.c80.io',
+        'port' => 993,
+        'encryption', 'ssl',
+        'validate_cert' => true,
+        'username' => 'wrkflw@c80.io',
+        'password' => '#Holocaust@2024',
+    ],
+
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),

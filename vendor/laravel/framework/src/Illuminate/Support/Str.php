@@ -1634,7 +1634,7 @@ class Str
     }
 
     /**
-     * Generate a time-ordered UUID.
+     * Generate a time-ordered UUID (version 4).
      *
      * @return \Ramsey\Uuid\UuidInterface
      */

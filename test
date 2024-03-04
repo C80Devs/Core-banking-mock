@@ -1,0 +1,66 @@
+array:24 [ // app/Http/Controllers/LAController.php:528
+  "title" => "THE ROLE OF LOCAL GOVERNMENT IN RURAL DEVELOPMENT IN NIGERIA"
+  "case_details" => """
+    Is it true that many people in the rural live on miserable low income; as a result, their standard of living is very poor, do not have access to social amenities and other basic necessity of life such as water, electricity, roads, health care services etc.
+
+    Can local government problem said to be to be as a result of the rush with which rural programmes are been implemented in the country. The rural communities view need and priorities are not always reflected in policies and programmes meant for rural development.
+
+    Thus, low level of participation by the poor, even through the ultimate shareholders in the rural development efforts are the rural poor, and all often they are derived a voice in the formulation, implementation and management of rural development programmes.
+
+    How sure that, most rural development programmes have had a single vector or intension and have failed to confront the multi-dimensionality of rural areas in Nigeria.
+    """
+  "tag" => "committee"
+  "category" => array:1 [
+    0 => "["history"]"
+  ]
+  "urgency_level" => "medium"
+  "deadline" => "2025-08-13 00:00:00"
+  "notes" => """
+    The overall aims and objectives of this study is to evaluate the performance or roles and effort of Mopa-Muro local government area in rural development specifically. The objectives of the study are as follows:-
+
+    a.       To find out the extent to which Mopa-Muro local government areas is identifying with the rural development of the rural areas.
+
+    b.       To examine the extent to which the general objectives of the rural development has been attained in Mopa-Muro local government area
+
+    c.       To find out major achievement and implement facing development aspiration of Mopa-Muro local government area.
+
+    d.       To ascertain whether sufficient funds have been made available to Mopa-Muro local government area or not.
+
+    e.       To explore and recommend appropriate alternative line of actions that will revive and sustain the rate of Mopa-Muro local government in rural development.
+
+    f.       To develop pro-efficiency in systematically examining rural development problems
+
+    g.       To identity the critical area of concerns in the field addressing issues of rural neglect
+    """
+  "format" => array:1 [
+    0 => "["[\"docs\"]"]"
+  ]
+  "attachments" => array:1 [
+    0 => "["[\"https:\\\/\\\/s3.us-east-2.amazonaws.com\\\/carcassv0.1\\\/uploads\\\/1708530429_TRADITIONAL%20POLITICAL%20SYSTEM%20AND%20THE%20DEVELOPMENT%20OF%20DEMOCRACY%20IN%20NIGERIA.%20A%20STUDY%20OF%20LAGOS%20STATE%202010-2019.pdf\"]"]"
+  ]
+  "reference_materials" => array:1 [
+    0 => "["[\"Grassroots Governance: Local Government and Rural Development in Nigeria\\\" by Yusuf Adebayo (2018).\",\"Empowering Local Governments for Sustainable Rural Development in Nigeria\\\" in Journal of Governance and Development, Vol. 12, No. 1 (2020).\",\"Local Government and Rural Development: RuralDevPolicy.ng\\\/local-govt-impact\"]"]"
+  ]
+  "stage" => 1
+  "status" => "pending"
+  "docId" => 38
+  "date_created" => "2024-02-21T15:47:28.000000Z"
+  "user_id" => 111
+  "new_attachments" => null
+  "createdBy" => "undefined undefined"
+  "member" => "96"
+  "liaisonOfficer" => array:3 [
+    "staff_id" => "LSN-001"
+    "signature" => ""
+    "comment" => ""
+  ]
+  "technical_adviser" => array:1 [
+    "group_id" => "3"
+  ]
+  "director" => array:1 [
+    "group_id" => "3"
+  ]
+  "createdAt" => "2024-02-21T15:47:43.761Z"
+  "updatedAt" => "2024-02-21T16:29:14.764Z"
+  "id" => "65d61b1fb375d50ee5c49217"
+]

@@ -1,66 +1,395 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Liason Backend API Documentation
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Base URL
 
-## About Laravel
+```
+http://92.205.128.143/liason/public/api/
+```
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Endpoints
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### User Registration
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Endpoint**: `/register`
+- **Method**: POST
+- **Request Body**:
 
-## Learning Laravel
+```json
+{
+    "firstname": "string",
+    "middlename": "string",
+    "lastname": "string",
+    "email": "string",
+    "password": "string",
+    "is_sla": "boolean",
+    "level": "integer",
+    "photo": "string (URL)"
+}
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### User Login
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Endpoint**: `/login`
+- **Method**: POST
+- **Request Body**:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```json
+{
+    "email": "string",
+    "password": "string"
+}
+```
 
-## Laravel Sponsors
+### Password Reset
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Endpoint**: `/reset-password`
+- **Method**: POST
+- **Request Body**:
 
-### Premium Partners
+```json
+{
+    "email": "string"
+}
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### User Logout
 
-## Contributing
+- **Endpoint**: `/logout`
+- **Method**: POST
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Change Password
 
-## Code of Conduct
+- **Endpoint**: `/change-password`
+- **Method**: POST
+- **Request Body**:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```json
+{
+    "current_password": "string",
+    "new_password": "string"
+}
+```
 
-## Security Vulnerabilities
+### Token Validation
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Endpoint**: `/check-token`
+- **Method**: GET
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Super Admin Endpoints
+
+### Dashboard Statistics
+
+- **Endpoint**: `/super-admin/dashboard`
+- **Method**: GET
+
+### Summarized Dashboard Statistics
+
+- **Endpoint**: `/super-admin/small-dashboard`
+- **Method**: GET
+
+### Move User
+
+- **Endpoint**: `/super-admin/move-user`
+- **Method**: POST
+- **Request Parameters**:
+
+```json
+{
+    "la_id": "integer",
+    "old_user_id": "integer",
+    "new_user_id": "integer"
+}
+```
+
+### Generate Registration Link
+
+- **Endpoint**: `/super-admin/generate-registration-link`
+- **Method**: POST
+- **Request Parameters**:
+
+```json
+{
+    "code": "string"
+}
+```
+
+### Get User Details
+
+- **Endpoint**: `/super-admin/get-user/{id}`
+- **Method**: GET
+
+### Fetch Aides
+
+- **Endpoint**: `/super-admin/fetch-aides`
+- **Method**: POST
+- **Request Parameters**:
+
+```json
+{
+    "per_page": "integer",
+    "page": "integer"
+}
+```
+
+### Get Users
+
+- **Endpoint**: `/super-admin/get-users`
+- **Method**: POST
+- **Request Parameters**:
+
+```json
+{
+    "per_page": "integer",
+    "page": "integer"
+}
+```
+
+### Add User
+
+- **Endpoint**: `/super-admin/add-user`
+- **Method**: POST
+- **Request Parameters**:
+
+```json
+{
+    "firstname": "string",
+    "middlename": "string",
+    "lastname": "string",
+    "email": "string",
+    "bio": "string",
+    "party": "string",
+    "assembly": "string",
+    "leg_house": "string",
+    "position": "string",
+    "phone": "string",
+    "photo": "string (URL)"
+}
+```
+
+### Activate/Deactivate User
+
+- **Endpoint**: `/super-admin/activation`
+- **Method**: POST
+- **Request Parameters**:
+
+```json
+{
+    "user_id": "integer",
+    "active": "boolean"
+}
+```
+
+### Suspend/Lift Suspension on User
+
+- **Endpoint**: `/super-admin/suspension`
+- **Method**: POST
+- **Request Parameters**:
+
+```json
+{
+    "user_id": "integer",
+    "suspend": "boolean"
+}
+```
+
+### Get Rooms
+
+- **Endpoint**: `/super-admin/rooms`
+- **Method**: GET
+
+### Get Teams
+
+- **Endpoint**: `/super-admin/teams`
+- **Method**: GET
+
+### Get Room Owner Details
+
+- **Endpoint**: `/super-admin/room-owner-details`
+- **Method**: POST
+- **Request Parameters**:
+
+```json
+{
+    "user_id": "integer"
+}
+```
+
+### Delete User
+
+- **Endpoint**: `/super-admin/delete-user/{id}`
+- **Method**: DELETE
+
+### Edit User
+
+- **Endpoint**: `/super-admin/edit-user/{id}`
+- **Method**: POST
+- **Request Parameters**:
+
+```json
+{
+    "firstname": "string",
+    "middlename": "string",
+    "lastname": "string",
+    "email": "string",
+    "bio": "string",
+    "party": "string",
+    "assembly": "string",
+    "leg_house": "string",
+    "position": "string",
+    "phone": "string",
+    "photo": "string (URL)"
+}
+```
+
+---
+
+# LA API Documentation
+
+## Authentication
+
+All endpoints require authentication via JWT token. Include the token in the `Authorization` header of your requests.
+
+## LA Routes
+
+### Create Report
+
+- **Endpoint**: `/la/report/create`
+- **Method**: POST
+- **Request Body**:
+
+```json
+{
+    "title": "string",
+    "case_details": "string",
+    "tag": "string",
+    "category": ["string"],
+    "attachments": ["string"],
+    "urgency_level": "string",
+    "deadline": "date",
+    "notes": "string",
+    "format": [],
+    "reference_materials": ["string"],
+    "stage": "integer",
+    "room_id": "integer",
+    "rerun": "boolean",
+    "agreement": "boolean"
+}
+```
+
+### Edit Report
+
+- **Endpoint**: `/la/report/edit`
+- **Method**: PATCH
+- **Request Body**:
+
+```json
+{
+    "id": "integer",
+    "title": "string",
+    "case_details": "string",
+    "tag": "string",
+    "category": ["string"],
+    "attachments": ["string"],
+    "urgency_level": "string",
+    "deadline": "date",
+    "notes": "string",
+    "format": [],
+    "reference_materials": ["string"],
+    "stage": "integer",
+    "room_id": "integer",
+    "rerun": "boolean",
+    "agreement": "boolean"
+}
+```
+
+### Get All Reports
+
+- **Endpoint**: `/la/report/all/{complete}`
+- **Method**: GET
+- **Parameters**:
+    - `complete`: "true" or "false" (string) - Indicates whether to retrieve completed reports or not.
+
+### Get Single Report
+
+- **Endpoint**: `/la/report/single/{id}`
+- **Method**: GET
+- **Parameters**:
+    - `id`: Report ID (integer)
+
+### Post Report
+
+- **Endpoint**: `/la/report/post`
+- **Method**: POST
+- **Request Body**:
+
+```json
+{
+    "id": "integer",
+    "rerun": "boolean"
+}
+```
+
+### Get User Reports
+
+- **Endpoint**: `/la/report/user-reports`
+- **Method**: GET
+
+### Get Room Details
+
+- **Endpoint**: `/la/room-details`
+- **Method**: GET
+
+### Get Room Team
+
+- **Endpoint**: `/la/room-team`
+- **Method**: GET
+
+### Get Room Reports
+
+- **Endpoint**: `/la/room-reports`
+- **Method**: GET
+
+### Get Room Reports Count
+
+- **Endpoint**: `/la/room-reports-count`
+- **Method**: GET
+
+### Get Room Notifications
+
+- **Endpoint**: `/la/room-notifications`
+- **Method**: GET
+
+---
+
+## Additional Routes
+
+### Search Reports
+
+- **Endpoint**: `/la/search/{query}`
+- **Method**: GET
+- **Parameters**:
+    - `query`: Search query string
+
+### Update Notification Seen Status
+
+- **Endpoint**: `/la/notification/seen/{id}`
+- **Method**: PATCH
+
+### Fetch Reports from ERP
+
+- **Endpoint**: `/la/report/fetch-erp`
+- **Method**: GET
+
+### Fetch Non-LA Users
+
+- **Endpoint**: `/la/users/main`
+- **Method**: GET
+
+### Upload Files
+
+- **Endpoint**: `/la/upload`
+- **Method**: POST
+- **Request Body**: Form Data with key `uploads`
+
