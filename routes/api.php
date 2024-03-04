@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BalanceController;
+use App\Http\Controllers\TransactionsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,5 +20,6 @@ Route::prefix('account')->group(function () {
     Route::post('/restrict-debit', [AccountController::class, 'restrictDebit']);
     Route::post('/restrict', [AccountController::class, 'restrictAccount']);
     Route::post('/unrestrict', [AccountController::class, 'unRestrictAccount']);
+    Route::get('/transactions', [TransactionsController::class, 'getTransactionsForAccount']);
 });
 

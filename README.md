@@ -1,395 +1,121 @@
-# Liason Backend API Documentation
 
-## Base URL
+---
 
-```
-http://92.205.128.143/liason/public/api/
-```
+# MOCK CBA API Documentation
+
+## Introduction
+
+This document provides details about the available endpoints in the API and their functionalities.
 
 ## Endpoints
 
-### User Registration
+### 1. Create Account
 
-- **Endpoint**: `/register`
-- **Method**: POST
+- **URL**: `/create-account`
+- **Method**: `POST`
+- **Description**: Creates a new user account along with an associated bank account.
 - **Request Body**:
+  ```json
+  {
+      "firstname": "John",
+      "middlename": "Doe",
+      "lastname": "Smith",
+      "email": "john@example.com",
+      "address": "123 Main St",
+      "city": "Anytown",
+      "state": "State",
+      "postal_code": "12345",
+      "country": "Country",
+      "date_of_birth": "1990-01-01",
+      "phone_number": "123-456-7890",
+      "nin": "1234567891",
+      "bvn": "1234567801",
+      "account_type": "current" 
+  }
+  ```
+- **Response**:
+    - `status`: Indicates whether the request was successful (`true`) or not (`false`).
+    - `message`: A brief message describing the result of the operation.
+    - `user`: Details of the created user.
+    - `account`: Details of the created bank account.
 
-```json
-{
-    "firstname": "string",
-    "middlename": "string",
-    "lastname": "string",
-    "email": "string",
-    "password": "string",
-    "is_sla": "boolean",
-    "level": "integer",
-    "photo": "string (URL)"
-}
-```
+### 2. Account Operations
 
-### User Login
+#### Debit Account
 
-- **Endpoint**: `/login`
-- **Method**: POST
+- **URL**: `/account/debit`
+- **Method**: `POST`
+- **Description**: Allows debiting an amount from the specified bank account.
 - **Request Body**:
+  ```json
+  {
+      "account_number": "1234567890",
+      "amount": 500
+  }
+  ```
+- **Response**:
+    - `status`: Indicates whether the request was successful (`true`) or not (`false`).
+    - `message`: A brief message describing the result of the operation.
+    - `account`: Details of the updated bank account.
 
-```json
-{
-    "email": "string",
-    "password": "string"
-}
-```
+#### Credit Account
 
-### Password Reset
-
-- **Endpoint**: `/reset-password`
-- **Method**: POST
+- **URL**: `/account/credit`
+- **Method**: `POST`
+- **Description**: Allows crediting an amount to the specified bank account.
 - **Request Body**:
+  ```json
+  {
+      "account_number": "1234567890",
+      "amount": 500
+  }
+  ```
+- **Response**:
+    - `status`: Indicates whether the request was successful (`true`) or not (`false`).
+    - `message`: A brief message describing the result of the operation.
+    - `account`: Details of the updated bank account.
 
-```json
-{
-    "email": "string"
-}
-```
+#### Restrict Account Operations
 
-### User Logout
-
-- **Endpoint**: `/logout`
-- **Method**: POST
-
-### Change Password
-
-- **Endpoint**: `/change-password`
-- **Method**: POST
+- **URL**: `/account/restrict`
+- **Method**: `POST`
+- **Description**: Restricts both debit and credit operations for the specified account.
 - **Request Body**:
+  ```json
+  {
+      "account_number": "1234567890"
+  }
+  ```
+- **Response**:
+    - `status`: Indicates whether the request was successful (`true`) or not (`false`).
+    - `message`: A brief message confirming the restriction placed on the account.
 
-```json
-{
-    "current_password": "string",
-    "new_password": "string"
-}
-```
+#### Unrestrict Account Operations
 
-### Token Validation
+- **URL**: `/account/unrestrict`
+- **Method**: `POST`
+- **Description**: Removes restrictions on both debit and credit operations for the specified account.
+- **Request Body**:
+  ```json
+  {
+      "account_number": "1234567890"
+  }
+  ```
+- **Response**:
+    - `status`: Indicates whether the request was successful (`true`) or not (`false`).
+    - `message`: A brief message confirming the removal of restrictions from the account.
 
-- **Endpoint**: `/check-token`
-- **Method**: GET
+### 3. Transactions
+
+#### Get Transactions for Account
+
+- **URL**: `/account/transactions`
+- **Method**: `GET`
+- **Description**: Fetches all transactions associated with the specified bank account.
+- **Query Parameters**:
+    - `account_number`: The account number for which transactions are to be fetched.
+- **Response**:
+    - `status`: Indicates whether the request was successful (`true`) or not (`false`).
+    - `transactions`: List of transactions associated with the account.
 
 ---
-
-# Super Admin Endpoints
-
-### Dashboard Statistics
-
-- **Endpoint**: `/super-admin/dashboard`
-- **Method**: GET
-
-### Summarized Dashboard Statistics
-
-- **Endpoint**: `/super-admin/small-dashboard`
-- **Method**: GET
-
-### Move User
-
-- **Endpoint**: `/super-admin/move-user`
-- **Method**: POST
-- **Request Parameters**:
-
-```json
-{
-    "la_id": "integer",
-    "old_user_id": "integer",
-    "new_user_id": "integer"
-}
-```
-
-### Generate Registration Link
-
-- **Endpoint**: `/super-admin/generate-registration-link`
-- **Method**: POST
-- **Request Parameters**:
-
-```json
-{
-    "code": "string"
-}
-```
-
-### Get User Details
-
-- **Endpoint**: `/super-admin/get-user/{id}`
-- **Method**: GET
-
-### Fetch Aides
-
-- **Endpoint**: `/super-admin/fetch-aides`
-- **Method**: POST
-- **Request Parameters**:
-
-```json
-{
-    "per_page": "integer",
-    "page": "integer"
-}
-```
-
-### Get Users
-
-- **Endpoint**: `/super-admin/get-users`
-- **Method**: POST
-- **Request Parameters**:
-
-```json
-{
-    "per_page": "integer",
-    "page": "integer"
-}
-```
-
-### Add User
-
-- **Endpoint**: `/super-admin/add-user`
-- **Method**: POST
-- **Request Parameters**:
-
-```json
-{
-    "firstname": "string",
-    "middlename": "string",
-    "lastname": "string",
-    "email": "string",
-    "bio": "string",
-    "party": "string",
-    "assembly": "string",
-    "leg_house": "string",
-    "position": "string",
-    "phone": "string",
-    "photo": "string (URL)"
-}
-```
-
-### Activate/Deactivate User
-
-- **Endpoint**: `/super-admin/activation`
-- **Method**: POST
-- **Request Parameters**:
-
-```json
-{
-    "user_id": "integer",
-    "active": "boolean"
-}
-```
-
-### Suspend/Lift Suspension on User
-
-- **Endpoint**: `/super-admin/suspension`
-- **Method**: POST
-- **Request Parameters**:
-
-```json
-{
-    "user_id": "integer",
-    "suspend": "boolean"
-}
-```
-
-### Get Rooms
-
-- **Endpoint**: `/super-admin/rooms`
-- **Method**: GET
-
-### Get Teams
-
-- **Endpoint**: `/super-admin/teams`
-- **Method**: GET
-
-### Get Room Owner Details
-
-- **Endpoint**: `/super-admin/room-owner-details`
-- **Method**: POST
-- **Request Parameters**:
-
-```json
-{
-    "user_id": "integer"
-}
-```
-
-### Delete User
-
-- **Endpoint**: `/super-admin/delete-user/{id}`
-- **Method**: DELETE
-
-### Edit User
-
-- **Endpoint**: `/super-admin/edit-user/{id}`
-- **Method**: POST
-- **Request Parameters**:
-
-```json
-{
-    "firstname": "string",
-    "middlename": "string",
-    "lastname": "string",
-    "email": "string",
-    "bio": "string",
-    "party": "string",
-    "assembly": "string",
-    "leg_house": "string",
-    "position": "string",
-    "phone": "string",
-    "photo": "string (URL)"
-}
-```
-
----
-
-# LA API Documentation
-
-## Authentication
-
-All endpoints require authentication via JWT token. Include the token in the `Authorization` header of your requests.
-
-## LA Routes
-
-### Create Report
-
-- **Endpoint**: `/la/report/create`
-- **Method**: POST
-- **Request Body**:
-
-```json
-{
-    "title": "string",
-    "case_details": "string",
-    "tag": "string",
-    "category": ["string"],
-    "attachments": ["string"],
-    "urgency_level": "string",
-    "deadline": "date",
-    "notes": "string",
-    "format": [],
-    "reference_materials": ["string"],
-    "stage": "integer",
-    "room_id": "integer",
-    "rerun": "boolean",
-    "agreement": "boolean"
-}
-```
-
-### Edit Report
-
-- **Endpoint**: `/la/report/edit`
-- **Method**: PATCH
-- **Request Body**:
-
-```json
-{
-    "id": "integer",
-    "title": "string",
-    "case_details": "string",
-    "tag": "string",
-    "category": ["string"],
-    "attachments": ["string"],
-    "urgency_level": "string",
-    "deadline": "date",
-    "notes": "string",
-    "format": [],
-    "reference_materials": ["string"],
-    "stage": "integer",
-    "room_id": "integer",
-    "rerun": "boolean",
-    "agreement": "boolean"
-}
-```
-
-### Get All Reports
-
-- **Endpoint**: `/la/report/all/{complete}`
-- **Method**: GET
-- **Parameters**:
-    - `complete`: "true" or "false" (string) - Indicates whether to retrieve completed reports or not.
-
-### Get Single Report
-
-- **Endpoint**: `/la/report/single/{id}`
-- **Method**: GET
-- **Parameters**:
-    - `id`: Report ID (integer)
-
-### Post Report
-
-- **Endpoint**: `/la/report/post`
-- **Method**: POST
-- **Request Body**:
-
-```json
-{
-    "id": "integer",
-    "rerun": "boolean"
-}
-```
-
-### Get User Reports
-
-- **Endpoint**: `/la/report/user-reports`
-- **Method**: GET
-
-### Get Room Details
-
-- **Endpoint**: `/la/room-details`
-- **Method**: GET
-
-### Get Room Team
-
-- **Endpoint**: `/la/room-team`
-- **Method**: GET
-
-### Get Room Reports
-
-- **Endpoint**: `/la/room-reports`
-- **Method**: GET
-
-### Get Room Reports Count
-
-- **Endpoint**: `/la/room-reports-count`
-- **Method**: GET
-
-### Get Room Notifications
-
-- **Endpoint**: `/la/room-notifications`
-- **Method**: GET
-
----
-
-## Additional Routes
-
-### Search Reports
-
-- **Endpoint**: `/la/search/{query}`
-- **Method**: GET
-- **Parameters**:
-    - `query`: Search query string
-
-### Update Notification Seen Status
-
-- **Endpoint**: `/la/notification/seen/{id}`
-- **Method**: PATCH
-
-### Fetch Reports from ERP
-
-- **Endpoint**: `/la/report/fetch-erp`
-- **Method**: GET
-
-### Fetch Non-LA Users
-
-- **Endpoint**: `/la/users/main`
-- **Method**: GET
-
-### Upload Files
-
-- **Endpoint**: `/la/upload`
-- **Method**: POST
-- **Request Body**: Form Data with key `uploads`
-
