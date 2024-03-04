@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\AccountTypes;
 use App\Helpers\Helpers;
 use App\Models\User;
 use App\Models\AccountModel;
@@ -16,7 +17,6 @@ class AccountController extends Controller
 
     public function createAccount(Request $request): JsonResponse
     {
-        // Validation rules for user data
         $userRules = [
             'firstname' => 'required|string',
             'middlename' => 'nullable|string',
@@ -56,8 +56,8 @@ class AccountController extends Controller
                 'account_number' => $accountNumber,
                 'user_id' => $user->id,
                 'tier' => 1,
-                'type' => $request->account_type, // Change to 'current' if desired
-                'currency' => 'NGN',
+                'type' => $request->account_type ?? AccountTypes::NAIRA,
+                'currency' => AccountTypes::NAIRA,
                 'can_credit' => true,
                 'can_debit' => true,
                 'balance' => 10000.00,
