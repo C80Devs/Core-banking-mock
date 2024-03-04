@@ -84,4 +84,125 @@ class AccountController extends Controller
             ]);
         }
     }
+
+    /**
+     * Restrict debit functionality for the specified account.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function restrictDebit(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'account_number' => 'required|exists:accounts,account_number',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first()
+            ]);
+        }
+
+        $accountNumber = $request->input('account_number');
+
+        $account = AccountModel::where('account_number', $accountNumber)->first();
+
+        $account->can_debit = false;
+        $account->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Debit functionality restricted for the account'
+        ]);
+    }
+
+    /**
+     * Restrict credit functionality for the specified account.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function restrictCredit(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'account_number' => 'required|exists:accounts,account_number',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first()
+            ]);
+        }
+
+        $accountNumber = $request->input('account_number');
+
+        $account = AccountModel::where('account_number', $accountNumber)->first();
+
+        $account->can_credit = false;
+        $account->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Credit functionality restricted for the account'
+        ]);
+    }
+
+    public function restrictAccount(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'account_number' => 'required|exists:accounts,account_number',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first()
+            ]);
+        }
+
+        $accountNumber = $request->input('account_number');
+
+        $account = AccountModel::where('account_number', $accountNumber)->first();
+
+        $account->can_debit = false;
+        $account->can_credit = false;
+        $account->status = false;
+        $account->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Restriction placed on this account.'
+        ]);
+    }
+
+    public function unRestrictAccount(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'account_number' => 'required|exists:accounts,account_number',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first()
+            ]);
+        }
+
+        $accountNumber = $request->input('account_number');
+
+        $account = AccountModel::where('account_number', $accountNumber)->first();
+
+        $account->can_debit = true;
+        $account->can_credit = true;
+        $account->status = true;
+        $account->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Restriction removed on this account.'
+        ]);
+    }
+
 }
