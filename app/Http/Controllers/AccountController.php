@@ -31,6 +31,7 @@ class AccountController extends Controller
             'phone_number' => 'nullable|string',
             'nin' => 'required|string|unique:users,nin',
             'bvn' => 'required|string|unique:users,bvn',
+            'account_type' => 'required|string|in:savings,current',
         ];
 
         // Validate user data
@@ -55,11 +56,11 @@ class AccountController extends Controller
                 'account_number' => $accountNumber,
                 'user_id' => $user->id,
                 'tier' => 1,
-                'type' => 'savings', // Change to 'current' if desired
+                'type' => $request->account_type, // Change to 'current' if desired
                 'currency' => 'NGN',
                 'can_credit' => true,
                 'can_debit' => true,
-                'balance' => 0.00,
+                'balance' => 10000.00,
                 'status' => true,
                 'additional_field' => json_encode([]),
             ];

@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Validator;
 
 class BalanceController extends Controller
 {
-    const  WITHDRAWAL_CHARGE = 100;
+    private  const  WITHDRAWAL_CHARGE = 100;
 
     public function debitAccount(Request $request): JsonResponse
     {
         $rules = [
-            'account_number' => 'required|exists:account_models,account_number',
+            'account_number' => 'required|exists:accounts,account_number',
             'amount' => 'required|numeric|min:0',
         ];
 
@@ -56,7 +56,7 @@ class BalanceController extends Controller
                 'account_id' => $account->id,
                 'type' => 'debit',
                 'amount' => $request->amount,
-                'platform' => 'bank',
+                'platform' => 'online',
                 'reference' => Helpers::generateReferenceNumber(),
             ]);
 
@@ -64,7 +64,7 @@ class BalanceController extends Controller
                 'account_id' => $account->id,
                 'type' => 'charge',
                 'amount' => self::WITHDRAWAL_CHARGE,
-                'platform' => 'bank',
+                'platform' => 'online',
                 'reference' => Helpers::generateReferenceNumber(),
 
             ]);
