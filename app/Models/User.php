@@ -60,6 +60,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(AccountModel::class);
     }
+
+    public function fullName(): string
+    {
+        return $this->lastname." ".$this->firstname;
+    }
 }
 
 

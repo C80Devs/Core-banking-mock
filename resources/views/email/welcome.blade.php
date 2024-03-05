@@ -3,75 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Registration</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>New Account Created</title>
     <style>
+        /* Internal CSS */
         body {
-            background-color: #f8f9fa;
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
         .container {
-            margin-top: 50px;
-        }
-
-        .card {
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-header {
-            background-color: #007bff !important;
-            color: #fff;
-            border-radius: 10px 10px 0 0;
-            padding: 15px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .card-body {
-            padding: 30px;
-        }
-
-        .btn-primary {
-            background-color: #007bff !important;
-            border-color: #007bff !important;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            padding: 10px 20px;
-            text-decoration: none;
-            color: #fff !important;
+            background-color: #f9f9f9;
         }
 
-        .btn-primary:hover {
-            background-color: #0056b3 !important;
-            border-color: #0056b3 !important;
+        h1 {
+            color: #007bff;
         }
 
         p {
             margin-bottom: 10px;
-            font-size: 16px;
+        }
+        .account-details {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">Welcome, {{ $fullname }}!</div>
-                <div class="card-body">
-                    <p>Hello {{ $fullname }},</p>
-                    <p>Welcome to our platform! We're excited to have you on board.</p>
-                    <p>Please click the button below to get started:</p>
-                    <p>
-                        <a href="{{ $url }}" class="btn btn-primary">Get Started</a>
-                    </p>
-                    @include('email.email-footer')
-                </div>
-            </div>
-        </div>
+    <h1>New Account Created</h1>
+    <p>Hello {{ $fullName }},</p>
+    <p>We are delighted to inform you that your new account has been successfully created.</p>
+    <div class="account-details">
+        <p><strong>Account Name:</strong> {{ $fullName }}</p>
+        <p><strong>Account Number:</strong> {{ $accountNumber }}</p>
+        <p><strong>Account Type:</strong> {{ $accountType }}</p>
+        <p><strong>Account Currency:</strong> {{ $accountCurrency }}</p>
     </div>
+    <p>If you have any questions or concerns, feel free to contact our customer support team.</p>
+    <p>Thank you for choosing our bank!</p>
 </div>
 </body>
 </html>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enum\AccountTypes;
 use App\Helpers\Helpers;
+use App\Jobs\SendAccountCreatedEmail;
 use App\Models\User;
 use App\Models\AccountModel;
 use Illuminate\Http\JsonResponse;
@@ -67,6 +68,7 @@ class AccountController extends Controller
 
             // Create the account
             $account = AccountModel::create($accountData);
+            SendAccountCreatedEmail::dispatch($user,$account);
 
             DB::commit();
 
